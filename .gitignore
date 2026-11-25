@@ -1,0 +1,14 @@
+# Entorno y caché de Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Artefactos del pipeline: los reconstruye `make` (DVC controla su estado con dvc.lock)
+data/processed/
+models/
+
+# Registros de MLflow (se crean al entrenar)
+mlruns/
+mlartifacts/
+mlflow.db
