@@ -1,0 +1,75 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - path: src/prepare.py
+      hash: md5
+      md5: b7d2a101c913bfe82e5a8cddf44b85bf
+      size: 757
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 21dee5f770ac83207acad63362a562f2
+      size: 618
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 08e4bcdad1978e85a7bd5c3f720d4975
+      size: 2238
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: contrato/contrato_datos.json
+      hash: md5
+      md5: 34fb83a6f057785337b11634f3fc814b
+      size: 2335
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 21dee5f770ac83207acad63362a562f2
+      size: 618
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 08e4bcdad1978e85a7bd5c3f720d4975
+      size: 2238
+    - path: src/train.py
+      hash: md5
+      md5: b5ba10b2e5011179792d039d89682515
+      size: 2893
+    - path: src/validacion_ge.py
+      hash: md5
+      md5: 8ddedcdf8fc54e41a719c5c1158c1afd
+      size: 1634
+    - path: src/validar_datos.py
+      hash: md5
+      md5: 9e8a0e4c223fdb11e85133b5e29ec57e
+      size: 8480
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: d98224e3e67a820e24292bb1160b6acf
+      size: 187265
+  test:
+    cmd: pytest tests/
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 21dee5f770ac83207acad63362a562f2
+      size: 618
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 08e4bcdad1978e85a7bd5c3f720d4975
+      size: 2238
+    - path: models/model.pkl
+      hash: md5
+      md5: d98224e3e67a820e24292bb1160b6acf
+      size: 187265
+    - path: src/
+      hash: md5
+      md5: cec143c811579abf65f36f46cb8af6df.dir
+      size: 28312
+      nfiles: 8
+    - path: tests/
+      hash: md5
+      md5: ecdcaa700acb3b3cf4797a55237799d6.dir
+      size: 26378
+      nfiles: 4

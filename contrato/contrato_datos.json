@@ -1,0 +1,75 @@
+{
+  "contrato": "contrato_datos_iris",
+  "version": "2.0.0",
+  "descripcion": "Contrato oficial de datos del modelo de clasificación de flores Iris (Random Forest). Todo registro que no cumpla este contrato se rechaza antes de llegar al modelo.",
+  "fuente": "Dataset Iris de Fisher (1936), incluido en scikit-learn",
+  "campos": [
+    {
+      "nombre": "sepal length (cm)",
+      "tipo": "decimal",
+      "nulo_permitido": false,
+      "minimo": 4.0,
+      "maximo": 8.0,
+      "unidad": "cm",
+      "descripcion": "Largo del sépalo. El rango coincide con la validación de Great Expectations."
+    },
+    {
+      "nombre": "sepal width (cm)",
+      "tipo": "decimal",
+      "nulo_permitido": false,
+      "minimo": 1.0,
+      "maximo": 6.0,
+      "unidad": "cm",
+      "descripcion": "Ancho del sépalo."
+    },
+    {
+      "nombre": "petal length (cm)",
+      "tipo": "decimal",
+      "nulo_permitido": false,
+      "minimo": 0.5,
+      "maximo": 8.0,
+      "unidad": "cm",
+      "descripcion": "Largo del pétalo."
+    },
+    {
+      "nombre": "petal width (cm)",
+      "tipo": "decimal",
+      "nulo_permitido": false,
+      "minimo": 0.05,
+      "maximo": 3.0,
+      "unidad": "cm",
+      "descripcion": "Ancho del pétalo."
+    }
+  ],
+  "reglas_cruzadas": [
+    {
+      "id": "petalo_mas_largo_que_ancho",
+      "campos": ["petal length (cm)", "petal width (cm)"],
+      "descripcion": "El largo del pétalo debe ser mayor que su ancho (petal length (cm) > petal width (cm))."
+    }
+  ],
+  "objetivo": {
+    "nombre": "species",
+    "tipo": "entero",
+    "nulo_permitido": false,
+    "valores_permitidos": [0, 1, 2],
+    "descripcion": "Clase a predecir: 0 = setosa, 1 = versicolor, 2 = virginica. Solo se exige en los datos de entrenamiento; NO forma parte de la entrada de inferencia."
+  },
+  "ejemplo_entrada_valida": {
+    "sepal length (cm)": 5.1,
+    "sepal width (cm)": 3.5,
+    "petal length (cm)": 1.4,
+    "petal width (cm)": 0.2
+  },
+  "ejemplo_entrada_invalida": {
+    "sepal length (cm)": "cinco",
+    "sepal width (cm)": null,
+    "petal length (cm)": 12.5,
+    "petal width (cm)": 0.2
+  },
+  "errores_esperados_ejemplo_invalido": [
+    {"campo": "sepal length (cm)", "tipo_error": "tipo"},
+    {"campo": "sepal width (cm)", "tipo_error": "nulo"},
+    {"campo": "petal length (cm)", "tipo_error": "rango"}
+  ]
+}
